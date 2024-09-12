@@ -31,6 +31,16 @@ function tictactoeGame(playerOne, playerTwo){
             box_3x3_column.classList.add('sub_content');
             
         }
+
+        const box_hover = document.querySelectorAll('.sub_content');
+    
+        for(let k = 0; k < box_hover.length; k++){
+    
+            box_hover[k].onclick = function(){mouseOnClick()};
+            function mouseOnClick(){
+                box_hover[k].style.backgroundColor ="red";
+            }
+        } 
     }
 
     return "a winner";
