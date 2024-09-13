@@ -58,29 +58,33 @@ function playGame(){
     const choicePlayer = {
         a:1,
         b:2,
-        c:0
+        c:2
     }
+
+    const choicePlayerRow = [];
+    const choicePlayerNumber = [];
+
 
     for(const key in choicePlayer){
         if(boardGame.hasOwnProperty(key)){
             const element = choicePlayer[key];
-            console.log(element);
-            console.log(key);
+            choicePlayerRow.push(key);
+            choicePlayerNumber.push(element);
         }
     }
 
+    console.log(choicePlayerRow);
+    console.log(choicePlayerNumber);
+    console.log(choicePlayerNumber[1]===choicePlayerNumber[2]);
 
-    const choiceOneNumber = c[0];
-    const choiceTwoNumber = a[1];
-    const choiceThreeNumber =a[1];
 
-    if(choiceOne!==choiceTwo && choiceTwo!==choiceThree && choiceOne!==choiceThree &&  choiceOneNumber!==choiceTwoNumber && choiceTwoNumber!==choiceThreeNumber && choiceOneNumber!==choiceThreeNumber){
+    if(choicePlayerRow[0]!==choicePlayerRow[1] && choicePlayerRow[1]!==choicePlayerRow[2] && choicePlayerRow[0]!==choicePlayerRow[2] &&  choicePlayerNumber[0]!==choicePlayerNumber[1] && choicePlayerNumber[1]!==choicePlayerNumber[2] && choicePlayerNumber[0]!==choicePlayerNumber[2]){
         console.log("You're the Winner!!");
     }
-    else if(choiceOne===choiceTwo && choiceTwo===choiceThree){
+    else if(choicePlayerRow[0]===choicePlayerRow[1] && choicePlayerRow[1]!==choicePlayerRow[2]){
         console.log("You're the Winner!!");
     }
-    else if(choiceOneNumber === choiceTwoNumber && choiceTwoNumber === choiceThreeNumber){
+    else if(choicePlayerNumber[0]===choicePlayerNumber[1] && choicePlayerNumber[1]===choicePlayerNumber[2]){
         console.log("You're the Winner!!")
     }
     else{
@@ -89,7 +93,7 @@ function playGame(){
 
    
 
-    console.log(a[1]);
+   
 
 }
 
