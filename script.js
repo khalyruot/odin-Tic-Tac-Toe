@@ -47,4 +47,51 @@ function tictactoeGame(playerOne, playerTwo){
 
 }
 
+function playGame(){
+   
+    const boardGame = {
+        a:[1,2,3],
+        b:[1,2,3],
+        c:[1,2,3]
+    }
+
+    const choicePlayer = {
+        a:1,
+        b:2,
+        c:0
+    }
+
+    for(const key in choicePlayer){
+        if(boardGame.hasOwnProperty(key)){
+            const element = choicePlayer[key];
+            console.log(element);
+            console.log(key);
+        }
+    }
+
+
+    const choiceOneNumber = c[0];
+    const choiceTwoNumber = a[1];
+    const choiceThreeNumber =a[1];
+
+    if(choiceOne!==choiceTwo && choiceTwo!==choiceThree && choiceOne!==choiceThree &&  choiceOneNumber!==choiceTwoNumber && choiceTwoNumber!==choiceThreeNumber && choiceOneNumber!==choiceThreeNumber){
+        console.log("You're the Winner!!");
+    }
+    else if(choiceOne===choiceTwo && choiceTwo===choiceThree){
+        console.log("You're the Winner!!");
+    }
+    else if(choiceOneNumber === choiceTwoNumber && choiceTwoNumber === choiceThreeNumber){
+        console.log("You're the Winner!!")
+    }
+    else{
+        console.log("You're the Loser!!")
+    }
+
+   
+
+    console.log(a[1]);
+
+}
+
 tictactoeGame();
+playGame();
