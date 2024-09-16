@@ -15,7 +15,7 @@ const playerTwo = {
 
 const choicePlayer = {}
 
-
+var arrayIndexBox =[];
 var container = document.querySelector('.grid_area');
 
 function tictactoeGame(playerOne, playerTwo){
@@ -30,16 +30,11 @@ function tictactoeGame(playerOne, playerTwo){
             box_3x3_column.textContent = "";
             box_3x3_row.appendChild(box_3x3_column);
             box_3x3_column.classList.add('sub_content');
-            console.log("j:  " + j);
-            console.log("i: " + i);
-
-            
         }
     }
     
     for(let k=0; k<3; k++){
         const box_hover = document.querySelectorAll('.sub_content');
-        console.log("k: " + k);
     
         for(let l = 0; l < box_hover.length; l++){
 
@@ -52,7 +47,8 @@ function tictactoeGame(playerOne, playerTwo){
                     para.innerHTML = "X";
                     box_hover[l].appendChild(para);
                     console.log("l: " + l);
-                    boardGame_push(l);
+                    arrayIndexBox.push(l);
+                    console.log("arrayIndexBox: " + arrayIndexBox);
                    
                 }
                 else{
@@ -60,8 +56,17 @@ function tictactoeGame(playerOne, playerTwo){
                     para.innerHTML = "O";
                     box_hover[l].appendChild(para);
                     console.log("l: " + l);
-                    boardGame_push(l);
-                    console.log(choicePlayer);
+                    arrayIndexBox.push(l);
+
+                    function compareNumbers(a, b)
+                    {
+                            return a - b;
+                    }
+                        
+                    arrayIndexBox.sort(compareNumbers);
+                    console.log("arrayIndexBox: " + arrayIndexBox);
+                    playGame(arrayIndexBox);
+
                 }
             }
         } 
@@ -76,117 +81,33 @@ function tictactoeGame(playerOne, playerTwo){
 }
 
 
-
-function boardGame_push(l){
-    const keys_boardGame = [];
-    const values_boardGame = [];
-    if(l==0){
-        keys_boardGame.push("a");
-        values_boardGame.push(0);
-        keys_boardGame.forEach((key, index) => {
-            choicePlayer[key] = values_boardGame[index];
-        });
-    }
-    else if(l==1){
-        keys_boardGame.push("b");
-        values_boardGame.push(0);
-        keys_boardGame.forEach((key, index) => {
-            choicePlayer[key] = values_boardGame[index];
-        });
-    }
-    else if(l==2){
-        keys_boardGame.push("c");
-        values_boardGame.push(0);
-        keys_boardGame.forEach((key, index) => {
-            choicePlayer[key] = values_boardGame[index];
-        });
-    }
-    else if(l==3){
-        keys_boardGame.push("a");
-        values_boardGame.push(1);
-        keys_boardGame.forEach((key, index) => {
-            choicePlayer[key] = values_boardGame[index];
-        });
-    }
-    else if(l==4){
-        keys_boardGame.push("b");
-        values_boardGame.push(1);
-        keys_boardGame.forEach((key, index) => {
-            choicePlayer[key] = values_boardGame[index];
-        });
-    }
-    else if(l==5){
-        keys_boardGame.push("c");
-        values_boardGame.push(1);
-        keys_boardGame.forEach((key, index) => {
-            choicePlayer[key] = values_boardGame[index];
-        });
-    }
-    else if(l==6){
-        keys_boardGame.push("a");
-        values_boardGame.push(2);
-        keys_boardGame.forEach((key, index) => {
-            choicePlayer[key] = values_boardGame[index];
-        });
-    }
-    else if(l==7){
-        keys_boardGame.push("b");
-        values_boardGame.push(2);
-        keys_boardGame.forEach((key, index) => {
-        choicePlayer[key] = values_boardGame[index];
-        });
-    }
-    else if(l==8){
-        keys_boardGame.push("c");
-        values_boardGame.push(2);
-        keys_boardGame.forEach((key, index) => {
-            choicePlayer[key] = values_boardGame[index];
-        });
-    }
-    return choicePlayer;
-}
-
 function playGame(){
+    const a = [0,1,2]; 
+    const b = [3,4,5];
+    const c = [6,7,8];
+    const d = [0,4,8];
+    const e = [2,4,5];
+    const f = [0,3,6];
+    const g = [1,4,7];
+    const h = [2,5,8];
    
-    const boardGame = {
-        a:[1,2,3],
-        b:[1,2,3],
-        c:[1,2,3]
-    }
 
-    const choicePlayer = {
-        a:1,
-        b:2,
-        c:2
-    }
-
-    const choicePlayerRow = [];
-    const choicePlayerNumber = [];
-
-
-    for(const key in choicePlayer){
-        if(boardGame.hasOwnProperty(key)){
-            const element = choicePlayer[key];
-            choicePlayerRow.push(key);
-            choicePlayerNumber.push(element);
-        }
-    }
-
-
-    if(choicePlayerRow[0]!==choicePlayerRow[1] && choicePlayerRow[1]!==choicePlayerRow[2] && choicePlayerRow[0]!==choicePlayerRow[2] &&  choicePlayerNumber[0]!==choicePlayerNumber[1] && choicePlayerNumber[1]!==choicePlayerNumber[2] && choicePlayerNumber[0]!==choicePlayerNumber[2]){
+    
+    console.log(arrayIndexBox.toString()!==a.toString());
+    //console.log(arrayIndexBox[i] !== b[i] && arrayIndexBox[i] !== c[i] && arrayIndexBox[i] !== d[i] && arrayIndexBox[i] !== e[i]);
+    if(arrayIndexBox.toString() == a.toString() || arrayIndexBox.toString() == b.toString() || 
+        arrayIndexBox.toString() == c.toString() || arrayIndexBox.toString() == d.toString() ||
+        arrayIndexBox.toString() == e.toString() || arrayIndexBox.toString() == f.toString() ||
+        arrayIndexBox.toString() == g.toString() || arrayIndexBox.toString() == h.toString() ){
         console.log("You're the Winner!!");
-    }
-    else if(choicePlayerRow[0]===choicePlayerRow[1] && choicePlayerRow[1]!==choicePlayerRow[2]){
-        console.log("You're the Winner!!");
-    }
-    else if(choicePlayerNumber[0]===choicePlayerNumber[1] && choicePlayerNumber[1]===choicePlayerNumber[2]){
-        console.log("You're the Winner!!")
     }
     else{
+
         console.log("You're the Loser!!")
     }
+
+   
 }
 
 tictactoeGame();
 playGame();
-boardGame_push();
