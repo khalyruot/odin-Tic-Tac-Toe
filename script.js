@@ -1,7 +1,3 @@
-const playerOneName = "Jame";
-const playerOneMarker = "X";
-const playerTwoName = "David";
-const playerTwoMarer = "O";
 
 const playerOne = {
     name: "Jame", 
@@ -21,7 +17,7 @@ var arrayIndexBox_O =[];
 var container = document.querySelector('.grid_area');
 
 
-function tictactoeGame(playerOne, playerTwo){
+function tictactoeGame(){
 
     for(let i = 0; i<3; i++){
             const box_3x3_row = document.createElement('div');
@@ -44,102 +40,110 @@ function tictactoeGame(playerOne, playerTwo){
     }
     
 
-    
-    
-
     var box_click = document.querySelectorAll('.sub_content');
     var count = 0;
+    
     for(let l=0; l<9; l++){
         box_click[l].onclick = function(){
+            
+            console.log("l: " + l);
             count += 1;
             const para = document.createElement("p");
-            var playerMarker = "X";
-            console.log("choicePlayer_i: " + choicePlayer_i[l]);
-            console.log("choicePlayer_j: " + choicePlayer_j[l]);
             if (count%2==0){
-                playerMarker = "X";
-                console.log(playerMarker);
+                playerMarker = playerOne.marker;
                 para.innerHTML = playerMarker;
-                arrayIndexBox_X.push([choicePlayer_i[l],choicePlayer_j[l]]);
-                console.log("arrayIndexBox_X: " + arrayIndexBox_X);
-                playGame(arrayIndexBox_X);
-                const arrayIndexBox_X_Display = convertArrayToObject(arrayIndexBox_X);
-                console.log(arrayIndexBox_X_Display);
-                
+                arrayIndexBox_X.push(l);
+                function compareNumbers(a, b)
+                {
+                    return a - b;
+                }
+                arrayIndexBox_X.sort(compareNumbers);
+                playGame(arrayIndexBox_X, playerOne.name);
                 
             }
             else{
-                playerMarker = "O";
-                console.log(playerMarker);   
-                para.innerHTML = playerMarker;
+                para.innerHTML = playerTwo.marker;
                 arrayIndexBox_O.push(l);
                 function compareNumbers(a, b)
                 {
                     return a - b;
                 }
                 arrayIndexBox_O.sort(compareNumbers);
-                console.log("arrayIndexBox: " + arrayIndexBox_O);
-                playGame(arrayIndexBox_O);
-                convertArrayToObject(arrayIndexBox_O);
+                playGame(arrayIndexBox_O, playerTwo.name);
                 //console.log(arrayBoxObject);
             }
 
         box_click[l].appendChild(para);
+
         };
         
 
     }    
     
-    return "a winner";
 
 }
 
 
 
-
-function playGame(arrayIndexBox){
+function playGame(arrayIndexBox, Player){
     const a = [0,1,2]; 
     const b = [3,4,5];
     const c = [6,7,8];
     const d = [0,4,8];
-    const e = [2,4,5];
+    const e = [2,4,6];
     const f = [0,3,6];
     const g = [1,4,7];
     const h = [2,5,8];
-
-   
-
-    //console.log(arrayIndexBox[i] !== b[i] && arrayIndexBox[i] !== c[i] && arrayIndexBox[i] !== d[i] && arrayIndexBox[i] !== e[i]);
-    if(arrayIndexBox.toString() == a.toString() || arrayIndexBox.toString() == b.toString() || 
-        arrayIndexBox.toString() == c.toString() || arrayIndexBox.toString() == d.toString() ||
-        arrayIndexBox.toString() == e.toString() || arrayIndexBox.toString() == f.toString() ||
-        arrayIndexBox.toString() == g.toString() || arrayIndexBox.toString() == h.toString() ){
-        console.log("You're the Winner!!");
-        const para = document.createElement("p");
-        para.innerHTML = "X is the Winner";
-        document.getElementById("result_winner").appendChild(para);
-    }
-    else{
-
-        console.log("You're the Loser!!")
-        
-    }
-
-   
-}
-
-
-function convertArrayToObject(arrayBox){
-    const arrayBoxObject={
-        a: [arrayBox[0]],
-        b: [arrayBox[1]],
-        c: [arrayBox[2]]
-    }
+    var condition =[a, b, c, d, e, f, g, h];
     
-    return arrayBoxObject;
 
+    function exists(arr, search) {       // check to see input array include in condition array
+        return arr.some(row => 
+            Array.isArray(row) &&
+            Array.isArray(search) &&
+            row.length === search.length &&
+            row.every((val, index) => val === search[index])
+      )
+    };
+
+
+    
+    function allTeams(arr, size) {      // only take 3 index portion of the input array
+        let res = [];
+        function helper(curr, i) {
+          if (curr.length === size) res.push([...curr]);
+          else if (i < arr.length) {
+            helper(curr.concat(arr[i]), i + 1);
+            helper(curr, i + 1);
+          }
+        }
+        helper([], 0);
+        return res;
+    }
+    console.log(allTeams(arrayIndexBox, 3));
+
+
+
+    for(let i = 0; i<allTeams(arrayIndexBox, 3).length;i++){
+        if(exists(condition, allTeams(arrayIndexBox, 3)[i])){
+            const para = document.createElement("p");
+            para.innerHTML = Player + ": You are the Winner!!";
+            const display = document.getElementById("result_winner").appendChild(para);
+            return display;
+        }
+        else {
+    
+            const para = document.createElement("p");
+            para.innerHTML = "";
+            const display = document.getElementById("result_winner").appendChild(para);
+            return display;
+        }
+
+    }
+
+    
 }
+
 
 
 tictactoeGame();
-playGame();
