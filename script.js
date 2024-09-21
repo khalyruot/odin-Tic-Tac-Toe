@@ -74,6 +74,7 @@ function tictactoeGame(){
             }
 
         box_click[l].appendChild(para);
+        box_click[l].classList.add('sign_marker');
 
         };
         
