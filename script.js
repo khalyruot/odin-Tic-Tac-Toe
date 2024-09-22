@@ -17,6 +17,14 @@ var arrayIndexBox_O =[];
 var container = document.querySelector('.grid_area');
 
 
+function onclickFunction() {
+    window.location.reload();
+}
+
+
+
+
+
 function tictactoeGame(){
 
     for(let i = 0; i<3; i++){
@@ -49,7 +57,10 @@ function tictactoeGame(){
             console.log("l: " + l);
             count += 1;
             const para = document.createElement("p");
-            if (count%2==0){
+            if(count > 9){
+                window.location.reload();
+            }
+            else if (count%2==0){
                 playerMarker = playerOne.marker;
                 para.innerHTML = playerMarker;
                 arrayIndexBox_X.push(l);
@@ -131,6 +142,7 @@ function playGame(arrayIndexBox, Player){
             para.innerHTML = Player + ": You are the Winner!!";
             const display = document.getElementById("result_winner").appendChild(para);
             return display;
+           
         }
         else {
     
