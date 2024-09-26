@@ -16,6 +16,8 @@ var arrayIndexBox_X =[];
 var arrayIndexBox_O =[];
 var container = document.querySelector('.grid_area');
 
+var previous_box = [];
+
 
 function onclickFunction() {
     window.location.reload();
@@ -57,10 +59,7 @@ function tictactoeGame(){
             console.log("l: " + l);
             count += 1;
             const para = document.createElement("p");
-            if(count > 9){
-                window.location.reload();
-            }
-            else if (count%2==0){
+            if (count%2==0 && !previous_box.includes(l)){
                 playerMarker = playerOne.marker;
                 para.innerHTML = playerMarker;
                 arrayIndexBox_X.push(l);
@@ -72,7 +71,7 @@ function tictactoeGame(){
                 playGame(arrayIndexBox_X, playerOne.name);
                 
             }
-            else{
+            else if(count%2==1 && !previous_box.includes(l)){
                 para.innerHTML = playerTwo.marker;
                 arrayIndexBox_O.push(l);
                 function compareNumbers(a, b)
@@ -84,8 +83,17 @@ function tictactoeGame(){
                 //console.log(arrayBoxObject);
             }
 
+        
+        
+        console.log("previous_box: " + previous_box);
+
+
+        console.log("Previous_box: " + !previous_box.includes(l));
+
         box_click[l].appendChild(para);
         box_click[l].classList.add('sign_marker');
+        console.log("l: "+l)
+        previous_box.push(l);
 
         };
         
