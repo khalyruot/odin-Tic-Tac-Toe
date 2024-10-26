@@ -140,11 +140,62 @@ function playGame(arrayIndexBox, Player){
         helper([], 0);
         return res;
     }
-    console.log(allTeams(arrayIndexBox, 3));
+    
 
+    for(let i = 0; i < condition.length; i++){
+        for(let j = 0; j < allTeams(arrayIndexBox, 3).length; j++){
+            console.log("i: " + i);
+            console.log(condition[i]);
+            console.log("j: " + j);
+            console.log(allTeams(arrayIndexBox, 3)[j]);
+            const comparetwoarr = new compareTwoArray(condition[i],allTeams(arrayIndexBox, 3)[j]);
+            if(comparetwoarr.compare_two_arr() == 3){
+                console.log("A");
+                console.log("B");
+                const para = document.createElement("p");
+                para.innerHTML = Player + ": You are the Winner!!";
+                const display = document.getElementById("result_winner").appendChild(para);
+                return display;
+                  
+            }
 
+        }
+        
+    }
+    function compareTwoArray(arr_A, arr_B){
+        this.arr_A = arr_A;
+        this.arr_B = arr_B;
 
-    for(let i = 0; i<allTeams(arrayIndexBox, 3).length;i++){
+        this.compare_two_arr = function(){
+            let a = 0;
+
+            if(arr_A.length !== arr_B.length){
+                console.log("Keep Going");
+                a = 1;
+                console.log("a: "+a);
+                return a;
+            }
+            for(let i = 0; i<arr_A.length; i++){
+                if(arr_A[i]!==arr_B[i]){
+                    console.log("Keep Going");
+                    a = 2;
+                    console.log("a: "+a);
+                    return a;
+                    
+                }
+            
+            }
+          
+    
+            a = 3;
+            console.log("a: "+a);
+            return a;
+        }
+    }
+
+   
+    /*for(let i = 0; i<allTeams(arrayIndexBox, 3).length;i++){
+        console.log("condition:" + exists(allTeams(arrayIndexBox, 3)[i]),condition);
         if(exists(condition, allTeams(arrayIndexBox, 3)[i])){
             const para = document.createElement("p");
             para.innerHTML = Player + ": You are the Winner!!";
@@ -160,7 +211,7 @@ function playGame(arrayIndexBox, Player){
             return display;
         }
 
-    }
+    }*/
 
     
 }
