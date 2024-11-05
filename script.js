@@ -29,6 +29,8 @@ function onclickFunction() {
 
 function tictactoeGame(){
 
+    
+
     for(let i = 0; i<3; i++){
             const box_3x3_row = document.createElement('div');
             box_3x3_row.classList.add('content');
@@ -55,11 +57,12 @@ function tictactoeGame(){
     
     for(let l=0; l<9; l++){
         box_click[l].onclick = function(){
-            
-            console.log("l: " + l);
             count += 1;
             const para = document.createElement("p");
-            if (count%2==0 && !previous_box.includes(l)){
+            let final_value = document.getElementById("result_winner");
+            console.log("final_value_1: "+final_value.innerText);
+            
+            if (count%2==0 && !previous_box.includes(l) && !final_value.innerText.includes("n")){
                 playerMarker = playerOne.marker;
                 para.innerHTML = playerMarker;
                 arrayIndexBox_X.push(l);
@@ -69,9 +72,10 @@ function tictactoeGame(){
                 }
                 arrayIndexBox_X.sort(compareNumbers);
                 playGame(arrayIndexBox_X, playerOne.name);
+               
                 
             }
-            else if(count%2==1 && !previous_box.includes(l)){
+            else if(count%2==1 && !previous_box.includes(l) && !final_value.innerText.includes("n")){
                 para.innerHTML = playerTwo.marker;
                 arrayIndexBox_O.push(l);
                 function compareNumbers(a, b)
@@ -80,19 +84,15 @@ function tictactoeGame(){
                 }
                 arrayIndexBox_O.sort(compareNumbers);
                 playGame(arrayIndexBox_O, playerTwo.name);
-                //console.log(arrayBoxObject);
+                
             }
 
+            console.log("final_value_2: "+final_value.innerText);
         
-        
-        console.log("previous_box: " + previous_box);
-
-
-        console.log("Previous_box: " + !previous_box.includes(l));
+       
 
         box_click[l].appendChild(para);
         box_click[l].classList.add('sign_marker');
-        console.log("l: "+l)
         previous_box.push(l);
 
         };
@@ -115,16 +115,8 @@ function playGame(arrayIndexBox, Player){
     const g = [1,4,7];
     const h = [2,5,8];
     var condition =[a, b, c, d, e, f, g, h];
-    
+    let z = 0;
 
-    function exists(arr, search) {       // check to see input array include in condition array
-        return arr.some(row => 
-            Array.isArray(row) &&
-            Array.isArray(search) &&
-            row.length === search.length &&
-            row.every((val, index) => val === search[index])
-      )
-    };
 
 
     
@@ -143,19 +135,16 @@ function playGame(arrayIndexBox, Player){
     
 
     for(let i = 0; i < condition.length; i++){
+        
         for(let j = 0; j < allTeams(arrayIndexBox, 3).length; j++){
-            console.log("i: " + i);
-            console.log(condition[i]);
-            console.log("j: " + j);
-            console.log(allTeams(arrayIndexBox, 3)[j]);
+           
             const comparetwoarr = new compareTwoArray(condition[i],allTeams(arrayIndexBox, 3)[j]);
-            if(comparetwoarr.compare_two_arr() == 3){
-                console.log("A");
-                console.log("B");
+            if(comparetwoarr.compare_two_arr() == 3 &&  z==0){
+                
                 const para = document.createElement("p");
                 para.innerHTML = Player + ": You are the Winner!!";
                 const display = document.getElementById("result_winner").appendChild(para);
-                return display;
+                z = 1;
                   
             }
 
@@ -172,14 +161,12 @@ function playGame(arrayIndexBox, Player){
             if(arr_A.length !== arr_B.length){
                 console.log("Keep Going");
                 a = 1;
-                console.log("a: "+a);
                 return a;
             }
             for(let i = 0; i<arr_A.length; i++){
                 if(arr_A[i]!==arr_B[i]){
                     console.log("Keep Going");
                     a = 2;
-                    console.log("a: "+a);
                     return a;
                     
                 }
@@ -188,7 +175,7 @@ function playGame(arrayIndexBox, Player){
           
     
             a = 3;
-            console.log("a: "+a);
+           
             return a;
         }
     }
@@ -213,7 +200,8 @@ function playGame(arrayIndexBox, Player){
 
     }*/
 
-    
+    console.log("z: " + z);
+    return z;
 }
 
 
