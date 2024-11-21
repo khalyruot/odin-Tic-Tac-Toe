@@ -257,6 +257,9 @@ input_submit.onclick = function(){
         }
                     
     }
+    else if(player_name.includes(input_player.value)){
+        alert("Please Choose Different Name");
+    }
     else{
         alert("Please Choose Different Marker");
     }
