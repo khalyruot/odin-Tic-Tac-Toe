@@ -10,7 +10,7 @@ body {
     flex-direction: column;
 }
 .logo_part{
-    height: 120px;
+    height: 200px;
 }
 .grid_area{
     height: 350px;
@@ -49,4 +49,52 @@ body {
 h2{
     font-size: 10px;
     
+}
+
+#input_style{
+    width: 200px;
+    font-size: 20px;
+    margin: 10px;
+    
+}
+
+#input_style:hover{
+    background-color: rgb(217, 252, 252);
+    cursor: pointer;
+}
+
+#input_submit{
+    width: 80px;
+    font-size: 20px;
+   
+    
+}
+#input_submit:hover{
+    background-color: rgb(162, 240, 240);
+    cursor: pointer;
+  
+}
+
+#logo_player{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#selectOption{
+    font-size: 20px;
+    margin: 10px;
+}
+#selectOption:hover{
+    background-color: rgb(217, 252, 252);
+    cursor: pointer;
+  
+}
+#player_1{
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+#player_2{
+    font-size: 20px;
+    font-weight: bold;
 }
